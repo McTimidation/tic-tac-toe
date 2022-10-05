@@ -1,0 +1,16 @@
+body {
+    height: 100vh;
+}
+
+#app {
+    height: 100vh;
+}
+
+.container-fluid {
+    height: 100vh !important;
+}
+
+div {
+    border-width: 2px !important;
+    border-color: crimson !important;
+}
