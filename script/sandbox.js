@@ -37,12 +37,14 @@ function makeTag(tag,  id, clas, parent) {
 
 function drawboard() {
     makeTag('div', 'mainContainer', 'container', 'app');
-    let colCount = -2;
+    let colCount = -3;
     for (r = 1; r <= 3; r++) {
-        colCount += 2;
+        colCount += 3;
+        console.log(`colcount= ${colCount}`);
         makeTag('div', `row${r}`, 'row', 'mainContainer');
-        for (c = colCount; c <= c+2; c++) {
-            makeTag('div', `col${c}`, 'col', 'mainContainer');
+        for (c = colCount; c <= colCount + 2; c++) {
+            console.log(`c= ${c}`);
+            makeTag('div', `col${c}`, 'col', `row${r}`);
         }
     }
 
