@@ -10,7 +10,7 @@ let xArray = [];
 
 let oArray = [];
 
-let winningCombos =  [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [0,4,8], [2,5,8], [6,4,2]]
+let winningCombos =  [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['0','4','8'], ['2','5','8'], ['6','4','2']]
 
 
 
@@ -44,25 +44,27 @@ function drawboard() {
         makeTag('div', `row${r}`, 'row', 'mainContainer');
         for (c = colCount; c <= colCount + 2; c++) {
             console.log(`c= ${c}`);
-            makeTag('div', `col${c}`, 'col', `row${r}`);
+            makeTag('button', c, 'col', `row${r}`);
         }
     }
-
+}
 // function drawBoard();
 
 
-function handleClick() {
-    let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
+// function handleClick() {
 
-    if (moveCount % 2 !== 0) {
-        // oArray.push(newMove);
-        oArray.push(newMove.tile);
-    } else {
-        // xArray.push(newMove);
-        xArray.push(newMove.tile);
-    }
-    moveCount++;
-}
+
+    // let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
+
+    // if (moveCount % 2 !== 0) {
+    //     // oArray.push(newMove);
+    //     oArray.push(newMove.tile);
+    // } else {
+    //     // xArray.push(newMove);
+    //     xArray.push(newMove.tile);
+    // }
+    // moveCount++;
+
 
 function compareArrays(winNums, array) {
     return winNums.every(elem => array.includes(elem));
@@ -78,7 +80,25 @@ function checkWinCondition() {
                 console.log('O has 3 in a row!')
             }
         })
-}}
+}
+
+const onClick = (event) => {
+    console.log(event.target.id);
+    let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
+
+    if (moveCount % 2 !== 0) {
+        // oArray.push(newMove);
+        oArray.push(event.target.id);
+    } else {
+        // xArray.push(newMove);
+        xArray.push(event.target.id);
+    }
+    moveCount++;
+}
+
+
+window.addEventListener('click', onClick);
+
     // let i = 0;
 //     winningCombos.forEach((combo[i]) => {
 //         console.log(combo[i])
