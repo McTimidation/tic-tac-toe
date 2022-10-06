@@ -10,7 +10,7 @@ let xArray = [];
 
 let oArray = [];
 
-let winningCombos =  [['0','1','2'], ['3','4','5'], ['6','7','8'], ['0','3','6'], ['1','4','7'], ['0','4','8'], ['2','5','8'], ['6','4','2']]
+let winningCombos =  [['box0','box1','box2'], ['box3','box4','box5'], ['box6','box7','box8'], ['box0','box3','box6'], ['box1','box4','box7'], ['box0','box4','box8'], ['box2','box5','box8'], ['box6','box4','box2']]
 
 
 
@@ -23,6 +23,7 @@ function Square(mark, move, tile) {
 function getTurn() {
     if (moveCount % 2 !== 0) {
         return 'O';
+
     } else {
         return 'X';
     }
@@ -40,11 +41,9 @@ function drawboard() {
     let colCount = -3;
     for (r = 1; r <= 3; r++) {
         colCount += 3;
-        console.log(`colcount= ${colCount}`);
         makeTag('div', `row${r}`, 'row', 'mainContainer');
         for (c = colCount; c <= colCount + 2; c++) {
-            console.log(`c= ${c}`);
-            makeTag('button', c, 'col', `row${r}`);
+            makeTag('button', `box${c}`, 'col', `row${r}`);
         }
     }
 }
@@ -65,6 +64,9 @@ function drawboard() {
     // }
     // moveCount++;
 
+makeTag('h1', 'title', 'header', 'app');
+document.getElementById('title').textContent = "Tic-Tac-Toe"
+
 
 function compareArrays(winNums, array) {
     return winNums.every(elem => array.includes(elem));
@@ -83,15 +85,18 @@ function checkWinCondition() {
 }
 
 const onClick = (event) => {
-    console.log(event.target.id);
+    
+    let clickID = event.target.id;
     let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
 
     if (moveCount % 2 !== 0) {
         // oArray.push(newMove);
-        oArray.push(event.target.id);
+        oArray.push(clickID);
+        document.getElementById(clickID).textContent = 'O'
     } else {
         // xArray.push(newMove);
-        xArray.push(event.target.id);
+        xArray.push(clickID);
+        document.getElementById(clickID).textContent = 'X'
     }
     moveCount++;
 }
@@ -115,3 +120,4 @@ window.addEventListener('click', onClick);
 // }
     
 
+drawboard();
