@@ -12,6 +12,8 @@ let oArray = [];
 
 let winningCombos =  [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [0,4,8], [2,5,8], [6,4,2]]
 
+
+
 function Square(mark, move, tile) {
     this.mark = mark;
     this.move = move;
@@ -26,9 +28,23 @@ function getTurn() {
     }
 }
 
-function drawSqaure() {
-    
+function makeTag(tag,  id, clas, parent) {
+    let newEl = document.createElement(tag);
+    newEl.setAttribute('class', clas);
+    newEl.setAttribute('id', id);
+    document.getElementById(parent).appendChild(newEl);
 }
+
+function drawboard() {
+    makeTag('div', 'mainContainer', 'container', 'app');
+    let colCount = -2;
+    for (r = 1; r <= 3; r++) {
+        colCount += 2;
+        makeTag('div', `row${r}`, 'row', 'mainContainer');
+        for (c = colCount; c <= c+2; c++) {
+            makeTag('div', `col${c}`, 'col', 'mainContainer');
+        }
+    }
 
 // function drawBoard();
 
@@ -60,7 +76,7 @@ function checkWinCondition() {
                 console.log('O has 3 in a row!')
             }
         })
-}
+}}
     // let i = 0;
 //     winningCombos.forEach((combo[i]) => {
 //         console.log(combo[i])
