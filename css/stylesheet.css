@@ -49,6 +49,11 @@ button {
     background-color: white;
 }
 
+#reset {
+    font-size: large;
+    background-color: lightblue;
+}
+
 .row {
     height: 20%;
     max-width: 720px;
