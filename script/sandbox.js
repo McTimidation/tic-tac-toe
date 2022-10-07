@@ -48,7 +48,9 @@ function drawboard() {
         colCount += 7;
         makeTag('div', `row${r}`, 'row', 'mainContainer');
         for (c = colCount; c <= colCount + 6; c++) {
-            makeTag('button', c, 'col', `row${r}`);
+            makeTag('button', `${c}`, 'col', `row${r}`);
+            // let newMove = new Square(getTurn(), moveCount, c);
+            // console.log(newMove.tile);
         }
     }
 }
@@ -70,7 +72,7 @@ function drawboard() {
     // moveCount++;
 
 makeTag('h1', 'title', 'header', 'app');
-document.getElementById('title').textContent = "Tic-Tac-Toe"
+document.getElementById('title').textContent = "Connect 4? More like Connect Bore"
 
 
 function compareArrays(winNums, array) {
@@ -166,13 +168,25 @@ const onClick = (event) => {
     let clickID = event.target.id;
     let boxID = document.getElementById(clickID)
     // let rect = document.getElementById(clickID).getBoundingClientRect();, rect.x, rect.y
-    let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
     console.log(moveCount);
+    if (0 <= clickID <= 6) {
+        clickID += 42;
+    } else if (7 <= clickID <= 13) {
+        clickID += 35;
+    } else if (14 <= clickID <= 20) {
+        clickID += 28;
+    } else if (21 <= clickID <= 27) {
+        clickID += 21;
+    } else if (28 <= clickID <= 34) {
+        clickID += 14;
+    } 
     
 
     if (clickID === 'reset') {
         resetGame();
     }
+
+
     
 
     if (moveCount % 2 !== 0 && boxID.textContent === '') {
