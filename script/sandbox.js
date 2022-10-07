@@ -10,7 +10,8 @@ let xArray = [];
 
 let oArray = [];
 
-let winningCombos =  [['box0','box1','box2'], ['box3','box4','box5'], ['box6','box7','box8'], ['box0','box3','box6'], ['box1','box4','box7'], ['box0','box4','box8'], ['box2','box5','box8'], ['box6','box4','box2']]
+let winningCombos =  []
+
 
 
 
@@ -42,12 +43,12 @@ function makeTag(tag,  id, clas, parent) {
 
 function drawboard() {
     makeTag('div', 'mainContainer', 'container', 'app');
-    let colCount = -3;
-    for (r = 1; r <= 3; r++) {
-        colCount += 3;
+    let colCount = -7;
+    for (r = 1; r <= 7; r++) {
+        colCount += 7;
         makeTag('div', `row${r}`, 'row', 'mainContainer');
-        for (c = colCount; c <= colCount + 2; c++) {
-            makeTag('button', `box${c}`, 'col', `row${r}`);
+        for (c = colCount; c <= colCount + 6; c++) {
+            makeTag('button', c, 'col', `row${r}`);
         }
     }
 }
@@ -76,31 +77,89 @@ function compareArrays(winNums, array) {
     return winNums.every(elem => array.includes(elem));
 }
 
-function checkWinCondition() {
-        // let i = 0;
-        winningCombos.forEach((item) => {
-            if (compareArrays(item, xArray)) {
-                makeTag('h2','endMessage', '', 'title');
-                document.getElementById('endMessage').textContent = 'X wins!';
-                makeTag('button', 'reset', '', 'endMessage');
-                document.getElementById('reset').textContent = 'Play Again';
-                document.getElementById('reset').addEventListener('click', resetGame);
-            }
-            if (compareArrays(item, oArray)) {
-                makeTag('h2','endMessage', '', 'title');
-                document.getElementById('endMessage').textContent = 'O wins!';
-                makeTag('button', 'reset', '', 'endMessage');
-                document.getElementById('reset').textContent = 'Play Again';
-                document.getElementById('reset').addEventListener('click', resetGame);
-            } else if (moveCount === 9) {
-                makeTag('h2','endMessage', '', 'title');
-                document.getElementById('endMessage').textContent = "It's a tie!";
-                makeTag('button', 'reset', '', 'endMessage');
-                document.getElementById('reset').textContent = 'Play Again';
-                document.getElementById('reset').addEventListener('click', resetGame);
-            }
-        })
+function leftDownDiagonal(event) {
+        let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event += 6;
+    } winningCombos.push(combo);
 }
+
+function leftUpDiag(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event -= 8;
+        } winningCombos.push(combo);
+}
+
+function RightUpDiagonal(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event -= 6;
+        } winningCombos.push(combo);
+    }
+
+function rightDownDiag(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event += 8;
+        } winningCombos.push(combo);
+}
+
+function makeUpCombo(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event -= 7;
+        } winningCombos.push(combo);
+}
+
+function makeDownCombo(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event += 7;
+        } winningCombos.push(combo);
+}
+
+function leftCombo(event) {
+    let combo = [];
+        for (i = 0; i <= 3; i++) {
+        combo.push(event);
+        event -= 6;
+        } winningCombos.push(combo);
+}
+
+
+
+// function checkWinCondition() {
+        // let i = 0;
+//         winningCombos.forEach((item) => {
+//             if (compareArrays(item, xArray)) {
+//                 makeTag('h2','endMessage', '', 'title');
+//                 document.getElementById('endMessage').textContent = 'X wins!';
+//                 makeTag('button', 'reset', '', 'endMessage');
+//                 document.getElementById('reset').textContent = 'Play Again';
+//                 document.getElementById('reset').addEventListener('click', resetGame);
+//             }
+//             if (compareArrays(item, oArray)) {
+//                 makeTag('h2','endMessage', '', 'title');
+//                 document.getElementById('endMessage').textContent = 'O wins!';
+//                 makeTag('button', 'reset', '', 'endMessage');
+//                 document.getElementById('reset').textContent = 'Play Again';
+//                 document.getElementById('reset').addEventListener('click', resetGame);
+            // } else if (moveCount === 9) {
+            //     makeTag('h2','endMessage', '', 'title');
+            //     document.getElementById('endMessage').textContent = "It's a tie!";
+            //     makeTag('button', 'reset', '', 'endMessage');
+            //     document.getElementById('reset').textContent = 'Play Again';
+            //     document.getElementById('reset').addEventListener('click', resetGame);
+            // }
+//         })
+// }
 
 const onClick = (event) => {
     
@@ -109,6 +168,7 @@ const onClick = (event) => {
     // let rect = document.getElementById(clickID).getBoundingClientRect();, rect.x, rect.y
     let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
     console.log(moveCount);
+    
 
     if (clickID === 'reset') {
         resetGame();
@@ -126,7 +186,7 @@ const onClick = (event) => {
         document.getElementById(clickID).textContent = 'X';
         moveCount++;
     } console.log(clickID);
-    checkWinCondition();
+    // checkWinCondition();
 }
 
 function resetGame() {

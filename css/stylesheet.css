@@ -20,22 +20,6 @@ body {
 
 }
 
-#box0, #box1, #box2 {
-    border-top: none;
-}
-
-#box8, #box5, #box2 {
-    border-right: none;
-}
-
-#box8, #box7, #box6 {
-    border-bottom: none;
-}
-
-#box0, #box3, #box6 {
-    border-left: none;
-}
-
 #row1 {
     margin-top: 25px;
 }
@@ -55,7 +39,7 @@ button {
 }
 
 .row {
-    height: 20%;
+    height: 12%;
     max-width: 720px;
     margin: auto;
 }
