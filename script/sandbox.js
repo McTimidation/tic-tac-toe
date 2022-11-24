@@ -85,6 +85,7 @@ function checkWinCondition() {
                 makeTag('button', 'reset', '', 'endMessage');
                 document.getElementById('reset').textContent = 'Play Again';
                 document.getElementById('reset').addEventListener('click', resetGame);
+                return
             }
             if (compareArrays(item, oArray)) {
                 makeTag('h2','endMessage', '', 'title');
@@ -92,14 +93,17 @@ function checkWinCondition() {
                 makeTag('button', 'reset', '', 'endMessage');
                 document.getElementById('reset').textContent = 'Play Again';
                 document.getElementById('reset').addEventListener('click', resetGame);
-            } else if (moveCount === 9) {
+                return
+            }  
+            
+        })
+        if (moveCount === 9 && !document.getElementById('endMessage')) {
                 makeTag('h2','endMessage', '', 'title');
                 document.getElementById('endMessage').textContent = "It's a tie!";
                 makeTag('button', 'reset', '', 'endMessage');
                 document.getElementById('reset').textContent = 'Play Again';
-                document.getElementById('reset').addEventListener('click', resetGame);
-            }
-        })
+                document.getElementById('reset').addEventListener('click', resetGame)
+        }
 }
 
 const onClick = (event) => {
@@ -107,7 +111,7 @@ const onClick = (event) => {
     let clickID = event.target.id;
     let boxID = document.getElementById(clickID)
     // let rect = document.getElementById(clickID).getBoundingClientRect();, rect.x, rect.y
-    let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
+    // let newMove = new Square(getTurn(), moveCount, boardState[moveCount]);
     console.log(moveCount);
 
     if (clickID === 'reset') {
